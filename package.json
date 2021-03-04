@@ -20,6 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint --ext tsx,ts src --fix",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-react": "^7.22.0",
+    "prettier": "^2.0.5"
   }
 }
