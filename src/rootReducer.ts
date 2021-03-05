@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import appReducer from './appSlice';
-import authReducer from '../features/auth/authSlice';
-import diariesReducer from '../features/diary/diariesSlice';
-import entriesReducer from '../features/entry/entriesSlice';
-import userReducer from '../features/auth/userSlice';
+import appReducer from './app/appSlice';
+import authReducer from './features/auth/authSlice';
+import diariesReducer from './features/diary/diariesSlice';
+import entriesReducer from './features/entry/entriesSlice';
+import userReducer from './features/auth/userSlice';
 
 const rootReducer = combineReducers({
   app: appReducer,
