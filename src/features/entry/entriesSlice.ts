@@ -5,26 +5,19 @@ const entries = createSlice({
   name: 'entries',
   initialState: [] as Entry[],
   reducers: {
-    addEntry(state, { payload }: PayloadAction<Entry>) {
-      state.push(payload);
-    },
-    removeEntry(state, { payload }: PayloadAction<number>) {
-      state.splice(payload, 1);
+    setEntries(state, { payload }: PayloadAction<Entry[] | null>) {
+      return (state = payload != null ? payload : []);
     },
     updateEntry(state, { payload }: PayloadAction<Entry>) {
-      const { id, ...rest } = payload;
-      let entry = state.find((e) => e.id === id);
-      if (entry) {
-        entry = {
-          ...entry,
-          ...rest,
-        };
-        state.splice(id, 1, entry);
+      const { id } = payload;
+      const entryIndex = state.findIndex((e) => e.id === id);
+      if (entryIndex !== -1) {
+        state.splice(entryIndex, 1, payload);
       }
     },
   },
 });
 
-export const { addEntry, removeEntry, updateEntry } = entries.actions;
+export const { updateEntry } = entries.actions;
 
 export default entries.reducer;
