@@ -14,7 +14,7 @@ const auth = createSlice({
   name: 'auth',
   initialState: initialAuthState,
   reducers: {
-    saveToken(state: AuthState, { payload }: PayloadAction<string>) {
+    saveToken(state, { payload }: PayloadAction<string>) {
       if (payload) {
         state.token = payload;
       }
@@ -22,12 +22,12 @@ const auth = createSlice({
     clearToken(state) {
       state.token = null;
     },
-    toggleAuthState(state) {
-      state.isAuthenticated = !state.isAuthenticated;
+    setAuthState(state, { payload }: PayloadAction<boolean>) {
+      state.isAuthenticated = payload;
     },
   },
 });
 
-export const { saveToken, clearToken, toggleAuthState } = auth.actions;
+export const { saveToken, clearToken, setAuthState } = auth.actions;
 
 export default auth.reducer;
