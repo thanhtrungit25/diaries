@@ -1,9 +1,9 @@
-import { DiaryEntry } from './diary-entry.interface';
+import { Entry } from './entry.interface';
 
 export interface Diary {
   id: number;
   title: string;
-  entries: DiaryEntry[];
+  entries: Entry[];
   type: 'private' | 'public';
   createdAt: string;
   updatedAt: string;
