@@ -13,6 +13,6 @@ const rootReducer = combineReducers({
   editor: editorReducer,
 });
 
-export type RootState = typeof rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;
 
 export default rootReducer;
