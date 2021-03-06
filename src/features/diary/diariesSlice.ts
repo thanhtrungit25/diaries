@@ -7,7 +7,7 @@ const diaries = createSlice({
   reducers: {
     addDiary(state, { payload }: PayloadAction<Diary[]>) {
       const diariesToSave = payload.filter((payloadDiary) => {
-        return state.findIndex((diary) => diary.id === payloadDiary.id) !== -1;
+        return state.findIndex((diary) => diary.id === payloadDiary.id) == -1;
       });
 
       state.push(...diariesToSave);
