@@ -1,9 +1,16 @@
 import React, { FC } from 'react';
+import DiariesList from '../diary/DiariesList';
+import Editor from '../entry/Editor';
 
 const Home: FC = () => {
   return (
-    <div>
-      <p>Welcome user!</p>
+    <div className="two-cols">
+      <div className="left">
+        <DiariesList />
+      </div>
+      <div className="right">
+        <Editor />
+      </div>
     </div>
   );
 };
