@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Diary } from '../../interfaces/diary.interface';
 import http from '../../services/api';
@@ -91,9 +92,11 @@ const DiaryTile: FC<Props> = (props) => {
         <button style={buttonStyle} onClick={addNewEntry}>
           Add New Entry
         </button>
-        <button className="secondary" style={buttonStyle}>
-          View all &rarr;
-        </button>
+        <Link to={`diary/${diary.id}`} style={{ width: '100%' }}>
+          <button className="secondary" style={buttonStyle}>
+            View all &rarr;
+          </button>
+        </Link>
       </div>
     </div>
   );

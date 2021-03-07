@@ -50,6 +50,12 @@ const Editor: FC = () => {
           dispatch(updateEntry(_entry));
         });
     }
+
+    updateEditedEntry({
+      ...editedEntry,
+      title: '',
+      content: '',
+    });
   };
 
   return (

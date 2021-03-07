@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import http from '../../services/api';
 import { addDiary } from './diariesSlice';
@@ -8,12 +9,26 @@ import { User } from '../../interfaces/user.interface';
 import { AppDispatch } from '../../store';
 import { setUser } from '../auth/userSlice';
 import DiaryTile from './DiaryTile';
+import DiaryEntriesList from './DiaryEntriesList';
 
-const DiariesList: FC = (props) => {
+const Diaries: FC = (props) => {
   const user = useSelector((state: any) => state.user);
   const diaries = useSelector((state: any) => state.diaries);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const fetchDiaries = async () => {
+      if (user) {
+        http.get<null, Diary[]>(`/diaries/${user.id}`).then((data) => {
+          if (data && data.length) {
+            dispatch(addDiary(data));
+          }
+        });
+      }
+    };
+    fetchDiaries();
+  }, [user, dispatch]);
 
   const createDiary = async () => {
     const result: any = await Swal.mixin({
@@ -68,12 +83,19 @@ const DiariesList: FC = (props) => {
 
   return (
     <div style={{ padding: '1em 0.4em' }}>
-      <button onClick={createDiary}>Create New</button>
-      {diaries.map((diary: Diary, idx: number) => (
-        <DiaryTile key={idx} diary={diary} />
-      ))}
+      <Switch>
+        <Route path="/diary/:id">
+          <DiaryEntriesList />
+        </Route>
+        <Route path="/">
+          <button onClick={createDiary}>Create New</button>
+          {diaries.map((diary: Diary, idx: number) => (
+            <DiaryTile key={idx} diary={diary} />
+          ))}
+        </Route>
+      </Switch>
     </div>
   );
 };
 
-export default DiariesList;
+export default Diaries;
